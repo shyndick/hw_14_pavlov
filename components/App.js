@@ -1,5 +1,5 @@
 import header from './Header.js'
-import nav from './Nav.js'
+import dataAdd from './DataAdd.js'
 import main from './Main.js'
 import footer from './Footer.js'
 
@@ -30,10 +30,9 @@ class App {
         this.render = () => {
             document.body.appendChild(this.element);
             this.element.appendChild(header);
-            this.element.appendChild(main.init());
-            
+            this.element.appendChild(main);
+            this.element.appendChild(dataAdd);
             this.element.appendChild(footer);
-            main.add();
         };
         this.init = () => {
             this.getData();
