@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.header_wrapper {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.a{
+    color: black;
+    font-size: 20px;
+    padding: 15px 15px;
+
+
+}
+
+.a:hover {
+    border-bottom: 2px solid rgb(214, 214, 214);
+
+}
+
+.nav_items {
+    display: flex;
+}
+
+.nav_items li:not(:last-child) {
+    margin-right: 20px;
+}
+
+.main_title {
+    text-align: center;
+    padding: 20px 0px;
+    background-color: rgb(214, 214, 214);
+}
+
+.main_items{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_item{
+    
+    margin: 20px;
+    border: 2px solid rgb(214, 214, 214);
+    border-radius: 5px;
+}
+
+.item_card{
+    width: 300px;
+    height: 450px;
+    text-align: center;
+}
+
+.main_img {
+    margin: 0 auto;
+    width: 270px;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_img img {
+    max-width: 260px;
+    max-height: 260px;
+}
+
+.main_item_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    
+}
+
+.category {
+    background-color: rgb(214, 214, 214);
+    width: 100%;
+    padding: 5px 0;
+    font-style: italic;
+}
+
+.title{
+    text-align: center;
+    text-overflow: clip;
+    margin: 20px 0;
+    padding: 0 5px;
+}
+
+.price {
+    font-size: 30px;
+}
+
+.main_item_buttons{
+    text-align: center;
+    padding: 10px 0;
+    background-color: rgb(214, 214, 214);
+    width: 100%;
+}
+
+.btn {
+    border: 0ch;
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.footer {
+    height: 150px;
+    background-color: rgb(214, 214, 214);
+    display: flex;
+    align-items: center;
+}
+
+.footer_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer_item{
+    margin: 10px 0;
+}
