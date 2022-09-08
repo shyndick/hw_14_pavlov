@@ -7,7 +7,7 @@ class Footer {
                                     <div class="footer_wrapper">
                                         <div class="footer_logo">
                                             <a href="#" >
-                                            <img src="https://via.placeholder.com/200x60">
+                                            <img src="http://placeimg.com/200/60/any">
                                             </a>
                                         </div>
                                         <div class="footer_info">

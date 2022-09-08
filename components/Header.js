@@ -9,7 +9,7 @@ class Header {
                                     <div class="header_wrapper">
                                         <div class="header_logo">
                                             <a href="#" >
-                                                <img src="https://via.placeholder.com/200x60">
+                                                <img src="http://placeimg.com/200/60/any">
                                             </a>
                                         </div>
                                         ${nav.outerHTML}
