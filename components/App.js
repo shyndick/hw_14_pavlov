@@ -1,7 +1,7 @@
-import header from './Header.js'
-import nav from './Nav.js'
-import main from './Main.js'
-import footer from './Footer.js'
+// import header from './Header.js'
+// import nav from './Nav.js'
+// import main from './Main.js'
+// import footer from './Footer.js'
 
 class App {
     constructor() {
@@ -22,18 +22,24 @@ class App {
                         this.render()
                     }
                     
-                }, 3000)
+                }, 0)
             });
 
         }
 
-        this.render = () => {
+        this.render = async () => {
             document.body.appendChild(this.element);
-            this.element.appendChild(header);
-            this.element.appendChild(main.init());
-            
+            const dataHeader = await import('./Header.js');
+            const dataMain = await import('./Main.js');
+            const dataFooter = await import('./Footer.js');
+
+            const header = dataHeader.default;
+            const main = dataMain.default;
+            const footer = dataFooter.default;
+
+            this.element.appendChild(header);      
+            this.element.appendChild(main);      
             this.element.appendChild(footer);
-            main.add();
         };
         this.init = () => {
             this.getData();
