@@ -1,14 +1,23 @@
 class Nav {
     constructor() {
+        this.localDataNav = JSON.parse(localStorage.getItem('dataNav'));
+
+        this.element='';
+
         this.create = () => {
-            const element = document.createElement('nav');
-            element.classList.add('nav');
-            element.innerHTML=`<ul class="nav_items">
-                                    <li class="nav_item"><a href="#" class="a">Home</a></li>
-                                    <li class="nav_item"><a href="#" class="a">Show</a></li>
-                                    <li class="nav_item"><a href="#" class="a">Contacts</a></li>
+            this.element = document.createElement('nav');
+            this.element.classList.add('nav');
+            let li = '';
+
+            this.localDataNav.forEach(({slug, title})=>{
+                li += `<li class="nav_item"><a class="a" href="#${slug}">${title}</a></li>`
+
+            })
+
+            this.element.innerHTML=`<ul class="nav_items">
+                                    ${li}
                                 </ul>`
-            return element
+            return this.element
         }
 
         this.init = () => {

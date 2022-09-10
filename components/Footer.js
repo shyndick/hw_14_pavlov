@@ -1,9 +1,10 @@
 class Footer {
     constructor () {
+        this.element='';
         this.create = () => {
-            const element = document.createElement('footer');
-            element.classList.add('footer');
-            element.innerHTML=`<div class="container">
+            this.element = document.createElement('footer');
+            this.element.classList.add('footer');
+            this.element.innerHTML=`<div class="container">
                                     <div class="footer_wrapper">
                                         <div class="footer_logo">
                                             <a href="#" >
@@ -19,7 +20,7 @@ class Footer {
                                         </div>
                                     </div>
                                 </div>`
-            return element
+            return this.element
         }
         this.init = () => {
             return this.create()

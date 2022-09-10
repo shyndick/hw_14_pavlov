@@ -2,6 +2,7 @@
 // import nav from './Nav.js'
 // import main from './Main.js'
 // import footer from './Footer.js'
+import {getSlugOfHash, getPageData, hashChangeEvent} from '../utils/utils.js'
 
 class App {
     constructor() {
@@ -12,19 +13,34 @@ class App {
         };
 
         this.getData = () => {
-            fetch('https://fakestoreapi.com/products')
-            .then(res=>res.text())
-            .then(data=>{
+            fetch('../data/data.js')
+            .then(respone => respone.text())
+            .then(data => {
                 setTimeout(()=>{
-                    if(localStorage.data) this.render()
-                    else {
-                        localStorage.setItem('data', data);
-                        this.render()
-                    }
-                    
-                }, 0)
-            });
+                    localStorage.setItem('dataNav', data);
 
+                    fetch('https://fakestoreapi.com/products')
+                    .then(res=>res.text())
+                    .then(data=>{
+                        setTimeout(()=>{
+                            if(localStorage.data) {}
+                            else {
+                                localStorage.setItem('data', data);
+                            }
+                            hashChangeEvent(this.setTitle)
+                            this.render()
+                            
+                        }, 0)
+                    });
+                },0)
+
+            })
+        }
+
+        this.setTitle = (hash) => {
+            const slugOfHash = getSlugOfHash(hash);
+            const data = getPageData(slugOfHash);
+            document.title = (data.pageTitle)
         }
 
         this.render = async () => {
@@ -41,6 +57,7 @@ class App {
             this.element.appendChild(main);      
             this.element.appendChild(footer);
         };
+
         this.init = () => {
             this.getData();
             this.create();
