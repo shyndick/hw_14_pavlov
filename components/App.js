@@ -18,20 +18,8 @@ class App {
             .then(data => {
                 setTimeout(()=>{
                     localStorage.setItem('dataNav', data);
-
-                    fetch('https://fakestoreapi.com/products')
-                    .then(res=>res.text())
-                    .then(data=>{
-                        setTimeout(()=>{
-                            if(localStorage.data) {}
-                            else {
-                                localStorage.setItem('data', data);
-                            }
                             hashChangeEvent(this.setTitle)
                             this.render()
-                            
-                        }, 0)
-                    });
                 },0)
 
             })
@@ -65,7 +53,7 @@ class App {
             head.innerHTML=`<meta charset="UTF-8">
                             <meta http-equiv="X-UA-Compatible" content="IE=edge">
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <link rel="stylesheet" href="components/css/style.css">
+                            <link rel="stylesheet" href="css/style.css">
                             <title>Document</title>`
         };
     }

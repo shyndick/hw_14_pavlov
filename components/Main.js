@@ -1,4 +1,5 @@
-import {getSlugOfHash, getPageData, hashChangeEvent} from '../utils/utils.js'
+import {getSlugOfHash, getPageData, hashChangeEvent} from '../utils/utils.js';
+import {CATALOG} from '../constants/constants.js'
 
 class Main {
     constructor() {
@@ -26,49 +27,30 @@ class Main {
             const mainData = getPageData(slugOfHash);
             const {title, content} = mainData;
 
-            if(mainData.slug === 'catalog') {
-                this.addCatalog()
-            } else {
-            this.element.innerHTML=`<div class="container">
-                                    <div class="main_wrapper">
-                                        <h1 class="main_title">${title}</h1>
-                                        <p>${content}</p>
-                                    </div>
-                                </div>`
-                            }
+            this.element.innerHTML=this.getHtmlTemplate(title, content)
+                            
+
+            if(slugOfHash === CATALOG) {
+                import('./Catalog.js').then(response => {
+                    const responseDefault = response.default;
+                    responseDefault.then(data => {
+                        this.element.innerHTML=this.getHtmlTemplate(title, content, data.outerHTML)
+                    })
+                })
+            } 
+            
             return this.element
         };
 
-        this.addCatalog = () => {
-            let li='';
-                this.localData.forEach(({category, id, image, price, title})=>{
-                    li+= `<li class="main_item" id="${id}">
-                            <div class="item_card">
-                                <div class="main_img">
-                                    <img src="${image}">
-                                </div>
-                                <div class="main_item_info">
-                                    <p class="category">${category}</p>
-                                    <p class="title">${title}</p>
-                                    <p class="price">${price} $</p>
-                                </div>
-                            </div>
-                            <div class="main_item_buttons">
-                                <button class="btn btn_add" data-add="${id}">Добавить</button>
-                                <button class="btn btn_full" data-full="${id}">Подробнее</button>
-                            </div>
-                        </li>
-                        `
-                    this.element.innerHTML=`<div class="container">
+        this.getHtmlTemplate = (title, content, htmlElement) => {
+            return `
                         <div class="main_wrapper">
-                            <h1 class="main_title">Catalog</h1>
-                            <ul class="main_items">
-                                ${li}
-                            </ul>
-                        </div>
-                    </div>`
-                })
+                            <h1 class="main_title">${title}</h1>
+                            ${htmlElement ? htmlElement : ''}
+                            <p>${content}</p>
+                        </div>`
         }
+
 
         this.init = () => {
             this.create()
