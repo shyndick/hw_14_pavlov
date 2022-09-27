@@ -1,5 +1,6 @@
 import {getSlugOfHash, getPageData, hashChangeEvent} from '../utils/utils.js';
 import {CATALOG} from '../constants/constants.js'
+import product from './Product.js';
 
 class Main {
     constructor() {
@@ -30,18 +31,47 @@ class Main {
             this.element.innerHTML=this.getHtmlTemplate(title, content)
                             
 
-            if(slugOfHash === CATALOG) {
-                import('./Catalog.js').then(response => {
-                    const responseDefault = response.default;
-                    responseDefault.then(data => {
-                        this.element.innerHTML=this.getHtmlTemplate(title, content, data.outerHTML)
-                        console.log(this.element)
+            if(slugOfHash.includes(CATALOG)) {
+
+                if(slugOfHash === CATALOG) {
+                    import('./Catalog.js').then(response => {
+                        const responseDefault = response.default;
+                        responseDefault.then(data => {
+                            this.element.innerHTML=this.getHtmlTemplate(title, content, data.outerHTML);
+
+                            const addToCartBtns = this.element.querySelectorAll('.btn_add');
+                            addToCartBtns.forEach(btn => {
+                                btn.addEventListener('click', (e) => {
+                                    this.addToCart(e.target.id)
+                                })
+                            })
+                        })
                     })
-                })
+                }
+
+                if(slugOfHash.includes('/')) {
+                    this.element.innerHTML='loading....'
+                    import ('./Product.js').then(response=>{
+                        const product = response.default.init();
+                        product.then(productData => {
+                            this.element.innerHTML = productData.outerHTML
+                        })
+                    });
+                    
+                }
+                
             } 
             
             return this.element
         };
+
+        this.cart = [];
+
+        this.addToCart = (idProduct) => {
+            const dataCatalog = JSON.parse(localStorage.getItem('catalogData'));
+            const product = dataCatalog.find(({id}) => id === +idProduct);
+            console.log(product)
+        }
 
         this.getHtmlTemplate = (title, content, htmlElement) => {
             return `

@@ -1,10 +1,12 @@
+import {CATALOG} from '../constants/constants.js'
 class Catalog {
     constructor() {
-        this.catalogData = [];
+        this.catalogData = JSON.parse(localStorage.getItem('catalogData')) || [];
 
         this.getCatalogData = async () => {
-            const response = await fetch('https://fakestoreapi.com/products')
-            const data = await response.json()
+            const response = await fetch('https://fakestoreapi.com/products');
+            const data = await response.json(); 
+            localStorage.setItem('catalogData', JSON.stringify(data))
             return data
         };
 
@@ -23,7 +25,7 @@ class Catalog {
                                     <img src="${image}">
                                 </div>
                                 <div class="main_item_info">
-                                    <p class="title">${title}</p>
+                                    <p class="title"><a href="#${CATALOG}/${id}">${title}</a></p>
                                 </div>
                                 <div class="main_item_buttons">
                                     <p class="price">${price} $</p>
