@@ -3,8 +3,8 @@ class Catalog {
         this.catalogData = [];
 
         this.getCatalogData = async () => {
-            const respone = await fetch('https://fakestoreapi.com/products')
-            const data = await respone.json()
+            const response = await fetch('https://fakestoreapi.com/products')
+            const data = await response.json()
             return data
         };
 

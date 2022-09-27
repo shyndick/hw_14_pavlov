@@ -35,6 +35,7 @@ class Main {
                     const responseDefault = response.default;
                     responseDefault.then(data => {
                         this.element.innerHTML=this.getHtmlTemplate(title, content, data.outerHTML)
+                        console.log(this.element)
                     })
                 })
             } 
