@@ -9,8 +9,14 @@
 
 .app {
     background-color: #1e1e2d;
+    display: flex;
+    flex-direction: column;
+}
 
 
+
+.btn {
+    cursor: pointer;
 }
 
 .container {
@@ -24,6 +30,8 @@
     justify-content: space-between;
     align-items: center;
 }
+
+
 
 .header_logo img, .footer_logo img{
     border-radius: 10px;
@@ -43,8 +51,24 @@
     display: flex;
 }
 
+.nav_item:last-child {
+    margin-left: 100px;
+}
+
 .nav_items li:not(:last-child) {
     margin-right: 20px;
+}
+
+.main {
+    flex: 1 1 auto;
+}
+
+.main_content {
+    margin: 20px 0;
+}
+
+.main_content p {
+    text-align: center;
 }
 
 .main_title {
@@ -132,4 +156,129 @@
 
 .footer_item{
     margin: 10px 0;
+}
+
+.product_title {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.product_title h1{
+    max-width: 80%;
+    text-align: center;
+}
+
+.product_title_img_wrapper {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.product_img {
+    text-align: center;
+    width: 650px;
+    margin-bottom: 20px;
+}
+
+.product_img img{
+    max-width: 650px;
+    max-height: 500px;
+}
+
+/* .product_description_all {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+} */
+
+.product_price_add {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    margin-top: 15px;
+}
+
+.btn_product_add {
+    width: 250px;
+    height: 50px;
+    border: 2px  solid #8dc4;
+}
+
+.product_price_add h2 {
+    font-size: 40px;
+}
+
+.product_description {
+    max-width: 450px;
+}
+
+.product_description h3 {
+    margin-bottom: 20px;
+}
+
+.cart_null {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.cart_item {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    margin: 40px 0;
+}
+
+.table_img {
+    height: 80px;
+}
+
+.table_index {
+    width: 90px;
+}
+
+.table_title {
+    width: 650px;
+}
+
+.table_img img{
+    max-width: 80px;
+    max-height: 80px;
+}
+
+thead {
+    text-align: center;
+    height: 60px;
+}
+
+.table_img, 
+.table_index,
+.table_count,
+.table_price {
+    text-align: center;
+}
+
+.thead_count,
+.thead_price,
+.table_title {
+    padding: 0 10px;
+}
+
+.btn_delete,
+.btn_delete_all {
+    padding: 10px;
+    border: 2px  solid #8dc4;
+}
+
+tfoot {
+    text-align: center;
+}
+
+.btn_zakaz {
+    padding: 15px 50px;
+    border: 2px  solid #8dc4;
 }

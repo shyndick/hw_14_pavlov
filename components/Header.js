@@ -14,9 +14,7 @@ class Header {
                                             </a>
                                         </div>
                                         ${nav.outerHTML}
-                                        <div class="header_basket">
-                                            <a href="#" class="a">Basket</a>
-                                        </div>
+                                        
                                     </div>
 
                                 </div>`

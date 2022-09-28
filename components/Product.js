@@ -11,16 +11,31 @@ class Product  {
             const productData = await this.getProductData(idProduct)
 
             const element = document.createElement('div');
-            const {title, id, image, description, price} = productData
+            const {title, id, image, description, price, category} = productData
             element.classList.add('product');
 
             element.innerHTML =`<div class="product_wrapper">
-                                    <h1>${title}</h1>
-                                    <h3>${price}</h3>
-                                    <button class="btn btn_product_add" id="${id}">addProduct</button>
-                                    <p>${description}</p>
-                                    <img src="${image}" alt="${title}">
-
+                                    <div class="container">
+                                        <div class="product_title">
+                                            <h1>${title}</h1>
+                                        </div>
+                                        <div class="product_title_img_wrapper">   
+                                            <div class="product_img">
+                                                <img src="${image}" alt="${title}">
+                                            </div>
+                                            <div class="product_description_all">
+                                                <div class="product_description">
+                                                    <h3>Категория: ${category}</h3>
+                                                    <p>Описание: ${description}</p>
+                                                </div>
+                                                <div class="product_price_add">
+                                                    <h2>${price} $</h2>
+                                                    <button class="btn btn_product_add" id="${id}">addProduct</button>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>   
+                                    </div>
                                 </div>`
             
             return element
