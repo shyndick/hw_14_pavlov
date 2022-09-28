@@ -17,6 +17,7 @@ class Product  {
             element.innerHTML =`<div class="product_wrapper">
                                     <h1>${title}</h1>
                                     <h3>${price}</h3>
+                                    <button class="btn btn_product_add" id="${id}">addProduct</button>
                                     <p>${description}</p>
                                     <img src="${image}" alt="${title}">
 

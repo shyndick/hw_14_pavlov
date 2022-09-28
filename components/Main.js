@@ -1,6 +1,5 @@
 import {getSlugOfHash, getPageData, hashChangeEvent} from '../utils/utils.js';
-import {CATALOG} from '../constants/constants.js'
-import product from './Product.js';
+import {CATALOG, CART} from '../constants/constants.js'
 
 class Main {
     constructor() {
@@ -29,7 +28,13 @@ class Main {
             const {title, content} = mainData;
 
             this.element.innerHTML=this.getHtmlTemplate(title, content)
-                            
+            
+            if(slugOfHash === CART) {
+                import('./Cart.js').then(response => {
+                    const cartData = response.default.init()
+                    this.element.innerHTML = cartData.outerHTML;
+                })
+            }
 
             if(slugOfHash.includes(CATALOG)) {
 
@@ -55,6 +60,10 @@ class Main {
                         const product = response.default.init();
                         product.then(productData => {
                             this.element.innerHTML = productData.outerHTML
+                            const addProductBtn = this.element.querySelector('.btn_product_add');
+                            addProductBtn.addEventListener('click', (e) => {
+                                this.addToCart(e.target.id)
+                            })
                         })
                     });
                     
@@ -65,12 +74,24 @@ class Main {
             return this.element
         };
 
-        this.cart = [];
+        this.cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         this.addToCart = (idProduct) => {
             const dataCatalog = JSON.parse(localStorage.getItem('catalogData'));
             const product = dataCatalog.find(({id}) => id === +idProduct);
-            console.log(product)
+            const arrayIndex = this.cart.findIndex(({id}) => id === +idProduct);
+            
+            if (arrayIndex !== -1) {
+                
+                this.cart[arrayIndex].count += 1;
+            } else {
+                product.count = 1;
+                this.cart.push(product)
+            }
+
+            localStorage.setItem('cart', JSON.stringify(this.cart))
+
+            console.log(this.cart)
         }
 
         this.getHtmlTemplate = (title, content, htmlElement) => {
