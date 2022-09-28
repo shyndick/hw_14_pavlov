@@ -1,12 +1,9 @@
 import {getSlugOfHash, getPageData, hashChangeEvent} from '../utils/utils.js';
-import {CATALOG} from '../constants/constants.js'
-import product from './Product.js';
+import {CATALOG, CART} from '../constants/constants.js'
 
 class Main {
     constructor() {
         this.element='';
-
-        this.localData = JSON.parse(localStorage.getItem('data'));
 
         this.localDataNav = JSON.parse(localStorage.getItem('dataNav'));
 
@@ -29,7 +26,26 @@ class Main {
             const {title, content} = mainData;
 
             this.element.innerHTML=this.getHtmlTemplate(title, content)
-                            
+            
+            if(slugOfHash === CART) {
+                import('./Cart.js').then(response => {
+                    const cartData = response.default.init()
+                    this.element.innerHTML = cartData.outerHTML;
+                    
+                    const cart_delete_all = this.element.querySelector('.btn_delete_all');
+                        this.deleteBtnAll(cart_delete_all)
+                    const cart_zakaz_btn = this.element.querySelector('.btn_zakaz');
+                        this.deleteBtnAll(cart_zakaz_btn)
+
+                    const cart_delete = this.element.querySelectorAll('.btn_delete');
+                    cart_delete.forEach((product) => {
+                        product.addEventListener('click', (e) => {
+                            this.deleteItemCart(e.target.id)
+                            this.render(location.hash)
+                        })
+                    })
+                })
+            }
 
             if(slugOfHash.includes(CATALOG)) {
 
@@ -55,31 +71,73 @@ class Main {
                         const product = response.default.init();
                         product.then(productData => {
                             this.element.innerHTML = productData.outerHTML
+                            const addProductBtn = this.element.querySelector('.btn_product_add');
+                            addProductBtn.addEventListener('click', (e) => {
+                                this.addToCart(e.target.id)
+                            })
                         })
                     });
                     
                 }
-                
+
             } 
             
+
             return this.element
         };
 
-        this.cart = [];
+        this.cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         this.addToCart = (idProduct) => {
             const dataCatalog = JSON.parse(localStorage.getItem('catalogData'));
             const product = dataCatalog.find(({id}) => id === +idProduct);
-            console.log(product)
+            const arrayIndex = this.cart.findIndex(({id}) => id === +idProduct);
+            
+            if (arrayIndex !== -1) {
+                
+                this.cart[arrayIndex].count += 1;
+            } else {
+                product.count = 1;
+                this.cart.push(product)
+            }
+
+            localStorage.setItem('cart', JSON.stringify(this.cart))
         }
 
+
+        this.deleteAll = () => {
+            localStorage.removeItem('cart');
+            location.reload()
+        }
+
+        this.deleteBtnAll = (button) => {
+                        if(button){
+                            button.addEventListener('click', () => {
+                                this.deleteAll()
+                                
+                                // this.element.innerHTML = response.default.init().outerHTML;
+                                this.render(location.hash)
+                            })
+                        }
+        }
+
+        this.deleteItemCart = (idProduct) => {
+            this.cart = this.cart.filter(item => item.id !== +idProduct);
+            localStorage.setItem('cart', JSON.stringify(this.cart))
+
+        }
+
+
         this.getHtmlTemplate = (title, content, htmlElement) => {
-            return `
-                        <div class="main_wrapper">
-                            <h1 class="main_title">${title}</h1>
+            return `<div class="main_wrapper">
+                        <h1 class="main_title">${title}</h1>
+                        <div class="container">
                             ${htmlElement ? htmlElement : ''}
-                            <p>${content}</p>
-                        </div>`
+                            <div class="main_content">
+                                <p>${content}</p>
+                            </div>
+                        </div>
+                    </div>`
         }
 
 

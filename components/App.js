@@ -1,7 +1,3 @@
-// import header from './Header.js'
-// import nav from './Nav.js'
-// import main from './Main.js'
-// import footer from './Footer.js'
 import {getSlugOfHash, getPageData, hashChangeEvent} from '../utils/utils.js'
 
 class App {
@@ -18,6 +14,7 @@ class App {
             .then(data => {
                 setTimeout(()=>{
                     localStorage.setItem('dataNav', data);
+                            this.setTitle(location.hash)
                             hashChangeEvent(this.setTitle)
                             this.render()
                 },0)
@@ -28,7 +25,8 @@ class App {
         this.setTitle = (hash) => {
             const slugOfHash = getSlugOfHash(hash);
             const data = getPageData(slugOfHash);
-            document.title = (data.pageTitle)
+            document.title = (data.pageTitle);
+            console.log()
         }
 
         this.render = async () => {
@@ -55,7 +53,6 @@ class App {
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
                             <link rel="stylesheet" href="css/style.css">
                             <title>Document</title>`
-
         };
     }
 }
