@@ -66,7 +66,11 @@ class Main {
                 }
 
                 if(slugOfHash.includes('/')) {
-                    this.element.innerHTML='loading....'
+                    this.element.innerHTML=`<div class="container">
+                                                <div class="gif">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                                </div>
+                                            </div>`
                     import ('./Product.js').then(response=>{
                         const product = response.default.init();
                         product.then(productData => {
@@ -135,7 +139,7 @@ class Main {
                         <div class="container">
                             ${htmlElement ? htmlElement : ''}
                             <div class="main_content">
-                                <p>${content}</p>
+                                <p class="content">${content}</p>
                             </div>
                         </div>
                     </div>`
