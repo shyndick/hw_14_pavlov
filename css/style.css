@@ -9,6 +9,7 @@
 
 .app {
     background-color: #1e1e2d;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -60,7 +61,7 @@
 }
 
 .main {
-    flex: 1 1 auto;
+    flex-grow: 1;
 }
 
 .main_content {
@@ -110,8 +111,8 @@
 }
 
 .main_img img {
-    max-width: 250px;
-    max-height: 250px;
+    width: 250px;
+    height: 250px;
     border-radius: 10px;
 }
 
@@ -139,6 +140,10 @@
     padding: 5px;
     background-color: #1e1e2d;
     border-radius: 5px;
+}
+
+.cart_null img {
+    margin: 20px 0;
 }
 
 .footer {
@@ -237,6 +242,12 @@ table {
     height: 80px;
 }
 
+.table_img img {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+}
+
 .table_index {
     width: 90px;
 }
@@ -281,4 +292,5 @@ tfoot {
 .btn_zakaz {
     padding: 15px 50px;
     border: 2px  solid #8dc4;
+    font-size: 25px;
 }

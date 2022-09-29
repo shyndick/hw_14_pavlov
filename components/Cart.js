@@ -13,6 +13,7 @@ class Cart {
                 element.innerHTML = `<div class="container">
                                         <div class="cart_null">
                                             <h2>Корзина пуста</h2>
+                                            <img src="./img/cats.png">
                                         </div>
                                     </div>`
             } else {

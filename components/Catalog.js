@@ -38,13 +38,13 @@ class Catalog {
                 });
  
             element.classList.add('catalog_wrapper')
-            element.innerHTML = `<div class="container">
+            element.innerHTML = `
                                     <div class="main_wrapper">
                                         <ul class="main_items">
                                             ${li}
                                         </ul>
                                     </div>
-                                </div>`
+                                `
             return element
         }
 

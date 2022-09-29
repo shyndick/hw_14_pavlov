@@ -106,8 +106,9 @@ class Main {
 
 
         this.deleteAll = () => {
+            this.cart = [];
             localStorage.removeItem('cart');
-            location.reload()
+            
         }
 
         this.deleteBtnAll = (button) => {
